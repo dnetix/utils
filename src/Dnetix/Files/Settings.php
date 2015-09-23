@@ -21,7 +21,7 @@ class Settings {
             $this->$key = $value;
         }
         if(!isset($config['folderPath'])){
-            throw new Exception('A filePath to store the settings must be declared');
+            throw new Exception('A folderPath to store the settings must be declared');
         }
         $this->name = $name;
         $this->loadSettings();
