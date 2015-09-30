@@ -34,6 +34,10 @@ class DateDifference {
         $this->dateInterval = $dateInterval;
     }
 
+    public function inDays(){
+        return (int) $this->dateInterval->format('%a');
+    }
+
     public function inMonths(){
         return ($this->dateInterval->y * self::MONTHSPERYEAR) + $this->dateInterval->m;
     }
