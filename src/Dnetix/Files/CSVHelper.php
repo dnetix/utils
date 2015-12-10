@@ -1,5 +1,5 @@
 <?php
-namespace Dnetix\Utils\Files;
+namespace Dnetix\Files;
 
 class CSVHelper {
     private $contents;
