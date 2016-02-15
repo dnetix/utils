@@ -50,4 +50,11 @@ class CSVHelper {
             }
         }, explode("\n", $this->content()));
     }
+
+    public static function fromFile($fileroute){
+        if(!file_exists($fileroute)){
+            throw new \Exception("There is no file " . $fileroute, 1);
+        }
+        return new self(file_get_contents($fileroute));
+    }
 }
