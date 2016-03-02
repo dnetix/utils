@@ -7,9 +7,7 @@ class CSVHelper {
 
     public function __construct($contents) {
         $this->contents = $contents;
-
         $this->lookDelimiter();
-        $this->cleanText();
     }
 
     public function getDelimiter() {
@@ -33,9 +31,10 @@ class CSVHelper {
         $this->delimiter = $options[$actual];
     }
 
-    private function cleanText() {
+    public function cleanText() {
         $this->contents = preg_replace('/\s+' . $this->getDelimiter() . '/', $this->getDelimiter(), $this->contents);
         $this->contents = preg_replace('/' . $this->getDelimiter() . '\s+/', $this->getDelimiter(), $this->contents);
+        return $this;
     }
 
     public function content() {
