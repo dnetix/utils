@@ -32,7 +32,7 @@ class FileWrapper {
     }
 
     public function setFilename($filename){
-        $this->filename = $filename;
+        $this->filename = $filename . $this->extension();
         return $this;
     }
 
@@ -90,6 +90,17 @@ class FileWrapper {
 
     public function extension(){
         return '.'.$this->file->getClientOriginalExtension();
+    }
+
+    public function getClientSize(){
+        return $this->file->getClientSize();
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\File\UploadedFile
+     */
+    public function original() {
+        return $this->file;
     }
 
     public function isImage(){

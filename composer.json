@@ -1,5 +1,6 @@
 {
     "name": "dnetix/utils",
+    "version": "0.2.0",
     "description": "A different set of utilities to make easier working in PHP",
     "type": "library",
     "license": "MIT",
@@ -9,10 +10,12 @@
             "email": "dnetix@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "facebook/php-sdk-v4": "^5.1"
+    },
     "autoload": {
         "psr-4": {
-        "Dnetix\\": "src/Dnetix/"
+          "Dnetix\\": "src/Dnetix/"
         }
     }
 }
