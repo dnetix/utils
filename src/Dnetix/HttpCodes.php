@@ -107,4 +107,8 @@ class HttpCodes {
         505=>'505 HTTP Version Not Supported'
     );
 
+    public static function isValidCode($code){
+        return array_key_exists($code, self::$messages);
+    }
+
 }
