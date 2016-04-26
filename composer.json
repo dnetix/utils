@@ -10,8 +10,8 @@
             "email": "dnetix@gmail.com"
         }
     ],
-    "require": {
-        "facebook/php-sdk-v4": "^5.1"
+    "suggest": {
+        "facebook/php-sdk-v4": "To use the Social Facebook Handler"
     },
     "autoload": {
         "psr-4": {
@@ -22,6 +22,7 @@
         ]
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.3"
+        "phpunit/phpunit": "^5.3",
+        "facebook/php-sdk-v4": "5.1.*" 
     }
 }
