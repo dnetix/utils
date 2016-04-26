@@ -5,6 +5,19 @@ namespace Dnetix\Dates;
 use DateTime;
 use Exception;
 
+/**
+ * Provides a simple string format to check if a given datetime its in that range
+ * L = monday, M = tuesday, W = wednesday, J = thursday, V = friday, S = saturday, D = sunday
+ * For example:
+ *  LV8:05-16:20|S6-14|!S8-9
+ * Will provide a check true from monday to friday between 8:05 to 16:20, saturday from 6 to 8 and 9 to 14
+ * because exclamation sign negates the range saturday from 8 to 9
+ * As you can see the bar '|' separates different conditions
+ * If three or more day letters are provided then its not a range, those are separate days
+ *  LMJS8-12
+ * Will provide a check true for monday, tuesday, thursday and saturday between 8 to 12, note that wednesday
+ * and friday are not included.
+ */
 class DateRangeChecker
 {
 
