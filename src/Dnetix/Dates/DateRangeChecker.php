@@ -118,8 +118,8 @@ class DateRangeChecker
         $startTime = isset($match[self::IX_INITIAL_HOUR]) ? $match[self::IX_INITIAL_HOUR] : 0;
         $startTime .= isset($match[self::IX_INITIAL_MINS]) && $match[self::IX_INITIAL_MINS] != '' ? $match[self::IX_INITIAL_MINS] : '00';
         
-        $endTime = isset($match[self::IX_FINAL_HOUR]) ? $match[self::IX_FINAL_HOUR] : 23;
-        $endTime .= isset($match[self::IX_FINAL_MINS]) && $match[self::IX_FINAL_MINS] != '' ? $match[self::IX_FINAL_MINS] : '59';
+        $endTime = isset($match[self::IX_FINAL_HOUR]) ? $match[self::IX_FINAL_HOUR] : 24;
+        $endTime .= isset($match[self::IX_FINAL_MINS]) && $match[self::IX_FINAL_MINS] != '' ? $match[self::IX_FINAL_MINS] : '00';
         
         return [(int) $startTime, (int) $endTime];
     }
