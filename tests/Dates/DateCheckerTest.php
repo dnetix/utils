@@ -113,4 +113,19 @@ class DateCheckerTest extends TestCase
     {
         $checker = DateRangeChecker::load("LZ10-12");
     }
+
+    public function testItParsesCorrectlyTheFinalTime()
+    {
+        $testingDates = [
+            ['date' => $this->createDateTime('L', '00:10'), 'expect' => true],
+            ['date' => $this->createDateTime('L', '1:10')->getTimestamp(), 'expect' => false],
+            ['date' => $this->createDateTime('L', '1:01')->getTimestamp(), 'expect' => false],
+        ];
+
+        $checker = DateRangeChecker::load("L0-1");
+
+        foreach ($testingDates as $testingDate) {
+            $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
+        }
+    }
 }
