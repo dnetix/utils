@@ -128,4 +128,19 @@ class DateCheckerTest extends TestCase
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
         }
     }
+
+    public function testItParsesCorrectlySundays()
+    {
+        $testingDates = [
+            ['date' => $this->createDateTime('D', '06:10'), 'expect' => true],
+            ['date' => $this->createDateTime('L', '1:10')->getTimestamp(), 'expect' => false],
+            ['date' => $this->createDateTime('L', '1:01')->getTimestamp(), 'expect' => false],
+        ];
+
+        $checker = DateRangeChecker::load("D6-12");
+
+        foreach ($testingDates as $testingDate) {
+            $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
+        }
+    }
 }

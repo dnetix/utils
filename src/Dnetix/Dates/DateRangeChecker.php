@@ -82,7 +82,7 @@ class DateRangeChecker
         $expression = str_split($expression);
 
         if(sizeof($expression) == 1){
-            if($day = DateHelper::parseSuffix($expression[0])){
+            if(($day = DateHelper::parseSuffix($expression[0])) !== null){
                 $days[] = $day;
             }else{
                 throw new Exception("Invalid Format");
