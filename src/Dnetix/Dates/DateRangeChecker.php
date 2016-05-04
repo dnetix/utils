@@ -152,11 +152,8 @@ class DateRangeChecker
         $time = (int) $datetime->format('Gi');
         
         $invalidRangesDay = isset($this->invalidRanges[$dayOfWeek]) ? $this->invalidRanges[$dayOfWeek] : null;
-        if($invalidRangesDay){
-            // First im checking if there is a negated range for this time
-            if($this->checkForRanges($invalidRangesDay, $time)){
-                return false;
-            }
+        if($invalidRangesDay && $this->checkForRanges($invalidRangesDay, $time)){
+            return false;
         }
 
         if($this->allowAll){
