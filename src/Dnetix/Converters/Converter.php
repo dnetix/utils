@@ -6,6 +6,7 @@ namespace Dnetix\Converters;
 
 abstract class Converter
 {
+    use ConverterLoadTrait;
 
     /**
      * Handles the "to" call that performs the conversion
@@ -38,12 +39,5 @@ abstract class Converter
      * @return string
      */
     public abstract function identifier();
-
-    /**
-     * Loads up the value to converter
-     * @param $value
-     * @return mixed
-     */
-    public abstract static function load($value);
 
 }
