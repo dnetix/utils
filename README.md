@@ -1,4 +1,7 @@
 # PHP utilities
+
+![TravisCI for dnetix/utils](https://travis-ci.org/dnetix/utils.svg)
+
 A set of PHP utilities
 
 * [Installation](#installation)
@@ -16,7 +19,7 @@ As a dependency in your project's composer.json
 ```json
 {
     "require": {
-        "dnetix/utils": "*"
+        "dnetix/utils": "dev-master"
     }
 }
 ```
