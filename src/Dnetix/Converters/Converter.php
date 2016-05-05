@@ -6,7 +6,6 @@ namespace Dnetix\Converters;
 
 abstract class Converter
 {
-    use ConverterLoadTrait;
 
     /**
      * Handles the "to" call that performs the conversion
