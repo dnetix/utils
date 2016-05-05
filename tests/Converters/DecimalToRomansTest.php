@@ -2,7 +2,7 @@
 
 use Dnetix\Converters\DecimalConverter;
 
-class DecimalConverterTest extends TestCase
+class DecimalToRomansTest extends TestCase
 {
 
     public function convertDecimal($decimal)
