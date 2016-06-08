@@ -69,7 +69,7 @@ class ReCaptcha {
             return true;
         }else{
             $this->setStatus(false);
-            $this->addError($HTTPData->{'error-codes'});
+            $this->addError('Captcha retried, please challenge it again.');
             return false;
         }
     }
