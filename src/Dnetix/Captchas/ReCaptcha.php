@@ -2,9 +2,9 @@
 
 /**
  * Class ReCaptcha
- * A PHP way to handle Google's ReCaptcha
+ * A PHP way to use Google's ReCaptcha
  */
-class ReCaptcha {
+class ReCaptcha implements Captcha {
 
     public $status = false;
     public $errors = [];
@@ -101,7 +101,7 @@ class ReCaptcha {
      * it will load the javascript from google that handles the ReCaptcha
      * @return string
      */
-    public static function getScriptTag(){
+    public function getScriptTag(){
         return '<script src="' . self::URL_SCRIPT . '"></script>';
     }
 

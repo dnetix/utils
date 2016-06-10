@@ -1,6 +1,6 @@
 {
     "name": "dnetix/utils",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "description": "A different set of utilities to make easier working in PHP",
     "type": "library",
     "license": "MIT",
