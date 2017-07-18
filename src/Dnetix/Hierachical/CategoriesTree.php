@@ -52,6 +52,40 @@ class CategoriesTree extends HierarchicalTree {
         return implode("\n", $toReturn);
     }
 
+        public function asSpecialOrderedList(array $options = [], callable $func = null){
+        $toReturn[] = '<ul'.$this->parseOptions($options).'>';
+        $currentLevel = null;
+
+        foreach($this as $node){
+            if(is_null($currentLevel)){
+                $currentLevel = $node->level();
+            }else if($node->level() > $currentLevel){
+                $toReturn[] = "<ul>";
+                $currentLevel++;
+            }else if($node->level() < $currentLevel){
+                while($node->level() < $currentLevel){
+                    $toReturn[] = "</ul>";
+                    $currentLevel--;
+                }
+            }
+
+            if ($func) {
+                $toReturn[] = $func($this, $node);
+            } else {
+                $toReturn[] = '<li id="'.$this->prefixIdElement.'_'.$node->key().'" class="'.$this->classElement.'" data-id="'.$node->key().'">'.$node->data()->name().'</li>';
+            }
+        }
+
+        while($currentLevel > 0){
+            $toReturn[] = "</ul>";
+            $currentLevel--;
+        }
+
+        $toReturn[] = "</ul>";
+
+        return implode("\n", $toReturn);
+    }
+
     public function asHTMLSelect($name, $selectedId, $options = [], $blankOption = null){
         $select[] = '<select name="'.$name.'"'.$this->parseOptions($options).'>';
         if(!is_null($blankOption)){
