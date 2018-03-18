@@ -16,9 +16,9 @@ abstract class Converter
      */
     public function __call($name, $arguments)
     {
-        if(preg_match("/to([\w\d]+)/", $name, $matches)){
-            $toProvider = __NAMESPACE__ . '\Providers\\' .ucfirst($this->identifier() . 'To' . $matches[1]);
-            if(class_exists($toProvider)){
+        if (preg_match("/to([\w\d]+)/", $name, $matches)) {
+            $toProvider = __NAMESPACE__ . '\Providers\\' . ucfirst($this->identifier() . 'To' . $matches[1]);
+            if (class_exists($toProvider)) {
                 $provider = new $toProvider;
                 return call_user_func_array([$provider, 'convertValue'], [$this->value()]);
             }

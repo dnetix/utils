@@ -13,9 +13,9 @@ class RomansToDecimalTest extends TestCase
     public function testItParsesCorrectlySimpleNumbers()
     {
         $this->assertEquals(1, $this->convertRoman('I'));
-        
+
         $this->assertEquals(500, $this->convertRoman('D'));
-        
+
         $this->assertEquals(50, $this->convertRoman('L'));
     }
 
@@ -63,5 +63,5 @@ class RomansToDecimalTest extends TestCase
     {
         RomanConverter::load("XI")->decimal();
     }
-    
+
 }

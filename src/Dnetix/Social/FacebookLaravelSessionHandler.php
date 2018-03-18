@@ -1,14 +1,17 @@
 <?php
+
 namespace Dnetix\Social;
 
 use Facebook\PersistentData\PersistentDataInterface;
 
-class FacebookLaravelSessionHandler implements PersistentDataInterface {
+class FacebookLaravelSessionHandler implements PersistentDataInterface
+{
 
     private $handler;
     protected $sessionPrefix = 'FBRLH_';
 
-    public function __construct($handler) {
+    public function __construct($handler)
+    {
         $this->handler = $handler;
     }
 
@@ -19,7 +22,8 @@ class FacebookLaravelSessionHandler implements PersistentDataInterface {
      *
      * @return mixed
      */
-    public function get($key) {
+    public function get($key)
+    {
         return $this->handler->get($this->sessionPrefix . $key);
     }
 
@@ -29,7 +33,8 @@ class FacebookLaravelSessionHandler implements PersistentDataInterface {
      * @param string $key
      * @param mixed $value
      */
-    public function set($key, $value) {
+    public function set($key, $value)
+    {
         $this->handler->put($this->sessionPrefix . $key, $value);
     }
 

@@ -7,15 +7,15 @@ class DecimalConverter extends Converter
 {
 
     private $value;
-    
+
     protected function __construct($value = null)
     {
-        if(!is_numeric($value)){
+        if (!is_numeric($value)) {
             throw new \Exception("The value to convert has to be numeric");
         }
-        $this->value = (int) $value;
+        $this->value = (int)$value;
     }
-    
+
     /**
      * Returns the value in the converter to convert
      * @return mixed
@@ -33,7 +33,7 @@ class DecimalConverter extends Converter
     {
         return 'decimal';
     }
-    
+
     public static function load($value)
     {
         return new self($value);

@@ -1,4 +1,4 @@
-<?php  namespace Dnetix\Files;
+<?php namespace Dnetix\Files;
 
 /**
  * Class FileWrapper
@@ -8,7 +8,8 @@
  * @author Diego Calle
  * @package Dnetix\Files
  */
-class FileWrapper {
+class FileWrapper
+{
 
     private $file;
 
@@ -17,96 +18,113 @@ class FileWrapper {
     protected $override = false;
     protected $base_path;
 
-    function __construct($file) {
+    function __construct($file)
+    {
         $this->file = $file;
     }
 
-    public static function create($file){
+    public static function create($file)
+    {
         return new static($file);
     }
 
-    public function setUploadPath($uploadPath){
+    public function setUploadPath($uploadPath)
+    {
         $this->base_path = $uploadPath;
         $this->upload_path = $uploadPath;
         return $this;
     }
 
-    public function setFilename($filename){
+    public function setFilename($filename)
+    {
         $this->filename = $filename . $this->extension();
         return $this;
     }
 
-    public function setOverride($bool){
+    public function setOverride($bool)
+    {
         $this->override = $bool;
         return $this;
     }
 
-    public function uploadPath(){
+    public function uploadPath()
+    {
         return $this->upload_path;
     }
 
-    public function basePath(){
+    public function basePath()
+    {
         return $this->base_path;
     }
 
-    public function fileName(){
+    public function fileName()
+    {
         return $this->filename;
     }
 
-    public function fullPathWithName($relative = true){
-        if($relative){
-            return $this->basePath().$this->filename();
-        }else{
-            return $this->uploadPath().$this->filename();
+    public function fullPathWithName($relative = true)
+    {
+        if ($relative) {
+            return $this->basePath() . $this->filename();
+        } else {
+            return $this->uploadPath() . $this->filename();
         }
     }
 
-    public function moveIt(){
+    public function moveIt()
+    {
         $this->checkFilename();
         return $this->file->move($this->uploadPath(), $this->filename());
     }
 
-    public function checkFilename(){
-        if(is_null($this->filename)){
+    public function checkFilename()
+    {
+        if (is_null($this->filename)) {
             $this->filename = $this->file->getClientOriginalName();
         }
-        if(!$this->override){
-            while(file_exists($this->fullPathWithName(false))){
-                $this->filename = $this->getJustFilename().'_1'.$this->extension();
+        if (!$this->override) {
+            while (file_exists($this->fullPathWithName(false))) {
+                $this->filename = $this->getJustFilename() . '_1' . $this->extension();
             }
         }
         $this->filename = str_replace(' ', '', $this->filename);
     }
 
-    public function getFile(){
+    public function getFile()
+    {
         return $this->file;
     }
 
-    public function getJustFilename(){
+    public function getJustFilename()
+    {
         $parts = explode('.', $this->filename);
         array_pop($parts);
         return implode('.', $parts);
     }
 
-    public function extension(){
-        return '.'.$this->file->getClientOriginalExtension();
+    public function extension()
+    {
+        return '.' . $this->file->getClientOriginalExtension();
     }
 
-    public function getClientSize(){
+    public function getClientSize()
+    {
         return $this->file->getClientSize();
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\File\UploadedFile
      */
-    public function original() {
+    public function original()
+    {
         return $this->file;
     }
 
-    public function isImage(){
-        if(substr($this->file->getMimeType(), 0, 5) == 'image') {
+    public function isImage()
+    {
+        if (substr($this->file->getMimeType(), 0, 5) == 'image') {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

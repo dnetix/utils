@@ -16,12 +16,12 @@ class DateCheckerTest extends TestCase
         $date = DateHelper::create();
         $dayOfWeek = $date->dayOfWeek;
         $dayOfWeekNeeded = DateHelper::parseSuffix($day);
-        
+
         $difference = $dayOfWeekNeeded - $dayOfWeek;
-        
+
         $date->addDays($difference);
         $date->changeTime($time);
-        
+
         return $date;
     }
 
@@ -105,7 +105,7 @@ class DateCheckerTest extends TestCase
     {
         $checker = DateRangeChecker::load("Z");
     }
-    
+
     /**
      * @expectedException \Exception
      */

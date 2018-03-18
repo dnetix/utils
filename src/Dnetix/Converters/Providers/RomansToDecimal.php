@@ -5,7 +5,7 @@ namespace Dnetix\Converters\Providers;
 class RomansToDecimal implements Provider
 {
     protected $equivalents;
-    
+
     public static $ROMAN_DECIMAL = [
         'I' => 1,
         'V' => 5,
@@ -18,20 +18,20 @@ class RomansToDecimal implements Provider
 
     public function convertValue($value)
     {
-        $this->equivalents = array_map(function($roman){
+        $this->equivalents = array_map(function ($roman) {
             return self::parseRoman($roman);
         }, str_split($value));
-        
+
         $position = 0;
         $decimal = 0;
-        while ($position < $this->endOfEquivalents()){
+        while ($position < $this->endOfEquivalents()) {
             $actual = $this->valueAtPosition($position);
             $next = $this->valueAtPosition($position + 1);
-            
-            if($actual >= $next){
+
+            if ($actual >= $next) {
                 $decimal += $actual;
                 $position++;
-            }else{
+            } else {
                 $decimal += ($next - $actual);
                 $position += 2;
             }
@@ -51,7 +51,7 @@ class RomansToDecimal implements Provider
 
     public static function parseRoman($roman)
     {
-        if(!isset(self::$ROMAN_DECIMAL[$roman])){
+        if (!isset(self::$ROMAN_DECIMAL[$roman])) {
             throw new \Exception("There is no roman equivalent to: " . $roman);
         }
         return self::$ROMAN_DECIMAL[$roman];

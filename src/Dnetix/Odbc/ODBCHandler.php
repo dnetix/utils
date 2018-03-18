@@ -7,7 +7,8 @@
  * @author Diego Calle
  * @package Dnetix\Odbc
  */
-class ODBCHandler {
+class ODBCHandler
+{
 
     private $conn = FALSE;
 
@@ -25,7 +26,8 @@ class ODBCHandler {
     const TABLE_TYPE = 'TABLE_TYPE';
     const TABLE_REMARKS = 'REMARKS';
 
-    public function __construct($params = array()) {
+    public function __construct($params = array())
+    {
         if (isset($params['dns'])) {
             foreach ($params as $key => $value) {
                 $this->$key = $value;
@@ -33,23 +35,28 @@ class ODBCHandler {
         }
     }
 
-    public function setDNS($dns) {
+    public function setDNS($dns)
+    {
         $this->dns = $dns;
     }
 
-    public function setUser($user) {
+    public function setUser($user)
+    {
         $this->user = $user;
     }
 
-    public function setPass($pass) {
+    public function setPass($pass)
+    {
         $this->pass = $pass;
     }
 
-    public function setExcel($bool) {
+    public function setExcel($bool)
+    {
         $this->_isexcel = $bool;
     }
 
-    public function connect() {
+    public function connect()
+    {
         $this->conn = odbc_connect($this->dns, $this->user, $this->pass);
         if (!$this->conn) {
             $this->_error = odbc_errormsg();
@@ -63,7 +70,8 @@ class ODBCHandler {
      * Retorna un array con las tablas accesibles por el ODBC. Cada array tiene los encabezados
      * KEY => VALUE y los key son las constantes TABLE_*
      */
-    public function getTables() {
+    public function getTables()
+    {
         $tables = array();
         if ($this->_isConnected()) {
             $result = odbc_tables($this->conn);
@@ -86,7 +94,8 @@ class ODBCHandler {
      * @param $table
      * @return array|null
      */
-    public function getHeadersTable($table) {
+    public function getHeadersTable($table)
+    {
         if ($this->_isConnected()) {
             $table = $this->parseTable($table);
             $query = 'SELECT * FROM ' . $table;
@@ -114,7 +123,8 @@ class ODBCHandler {
      * @param $query
      * @return array|null
      */
-    public function query($query) {
+    public function query($query)
+    {
         if ($this->_isConnected()) {
             $result = odbc_exec($this->conn, $query);
             if (!$result) {
@@ -135,7 +145,8 @@ class ODBCHandler {
     /**
      * Comprueba que se haya realizado una conexion al ODBC
      */
-    private function _isConnected() {
+    private function _isConnected()
+    {
         if ($this->conn) {
             return TRUE;
         } else {
@@ -151,7 +162,8 @@ class ODBCHandler {
      * Retorna el nombre de la tabla enviado, si la conexion es a Excel, agrega
      * los caracteres especiales.
      */
-    public function parseTable($table) {
+    public function parseTable($table)
+    {
         if ($this->_isexcel) {
             $table = '[' . $table . '$]';
         }
@@ -161,15 +173,18 @@ class ODBCHandler {
     /**
      * Retorna el mensaje de error.
      */
-    public function getErrors() {
+    public function getErrors()
+    {
         return $this->_error;
     }
 
-    public function getODBCErrors() {
+    public function getODBCErrors()
+    {
         return odbc_errormsg();
     }
 
-    public function getResource() {
+    public function getResource()
+    {
         return $this->conn;
     }
 

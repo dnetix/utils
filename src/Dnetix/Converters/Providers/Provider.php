@@ -7,5 +7,5 @@ interface Provider
 {
 
     public function convertValue($value);
-    
+
 }

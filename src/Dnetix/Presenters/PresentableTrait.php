@@ -5,7 +5,8 @@
  * @author Diego Calle
  * @package Dnetix\Presenters
  */
-trait PresentableTrait {
+trait PresentableTrait
+{
 
     protected $presenterInstance;
 
@@ -14,11 +15,12 @@ trait PresentableTrait {
      * @return mixed
      * @throws PresenterException
      */
-    public function present(){
-        if(!$this->presenter || !class_exists($this->presenter)){
+    public function present()
+    {
+        if (!$this->presenter || !class_exists($this->presenter)) {
             throw new PresenterException("A presenter class implementation has not been declared.");
         }
-        if(!isset($this->presenterInstance)){
+        if (!isset($this->presenterInstance)) {
             $this->presenterInstance = new $this->presenter($this);
         }
         return $this->presenterInstance;

@@ -1,11 +1,12 @@
-<?php  namespace Dnetix\Presenters;
+<?php namespace Dnetix\Presenters;
 
 /**
  * Class Presenter
  * @author Diego Calle
  * @package Dnetix\Presenters
  */
-abstract class Presenter {
+abstract class Presenter
+{
 
     /**
      * Instance of the class to present
@@ -13,7 +14,8 @@ abstract class Presenter {
      */
     protected $entity;
 
-    function __construct(&$entity) {
+    function __construct(&$entity)
+    {
         $this->entity =& $entity;
     }
 
@@ -23,8 +25,9 @@ abstract class Presenter {
      * @param $property
      * @return mixed
      */
-    function __get($property){
-        if(method_exists($this, $property)){
+    function __get($property)
+    {
+        if (method_exists($this, $property)) {
             return $this->{$property}();
         }
         return $this->entity->{$property};
@@ -37,7 +40,8 @@ abstract class Presenter {
      * @param $arguments
      * @return mixed
      */
-    function __call($name, $arguments){
+    function __call($name, $arguments)
+    {
         return $this->entity->{$name}($arguments);
     }
 

@@ -1,7 +1,9 @@
 <?php
+
 namespace Dnetix\Files;
 
-class MimeTypes {
+class MimeTypes
+{
 
     const APPLICATION_ACAD = 'application/acad';
     const APPLICATION_ARJ = 'application/arj';
@@ -833,7 +835,8 @@ class MimeTypes {
         self::X_WORLD_X_VRT => ['.vrt']
     ];
 
-    public static function isValidMimeType($mimeType){
+    public static function isValidMimeType($mimeType)
+    {
         return isset(self::$MYMETYPE_EXTENSIONS[$mimeType]);
     }
 
@@ -841,8 +844,9 @@ class MimeTypes {
      * @param $mimeType
      * @return array|null
      */
-    public static function extensionsOfMimeType($mimeType) {
-        if(self::isValidMimeType($mimeType)){
+    public static function extensionsOfMimeType($mimeType)
+    {
+        if (self::isValidMimeType($mimeType)) {
             return self::$MYMETYPE_EXTENSIONS[$mimeType];
         }
         return null;
@@ -854,10 +858,11 @@ class MimeTypes {
      * @param $extension
      * @return array
      */
-    public static function mimeTypesOfExtension($extension) {
+    public static function mimeTypesOfExtension($extension)
+    {
         $mimeTypesMatched = [];
-        foreach(self::$MYMETYPE_EXTENSIONS as $mime => $extensions){
-            if(in_array($extension, $extensions)){
+        foreach (self::$MYMETYPE_EXTENSIONS as $mime => $extensions) {
+            if (in_array($extension, $extensions)) {
                 $mimeTypesMatched[] = $mime;
             }
         }

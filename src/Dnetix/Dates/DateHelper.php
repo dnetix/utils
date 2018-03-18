@@ -1,4 +1,4 @@
-<?php  namespace Dnetix\Dates;
+<?php namespace Dnetix\Dates;
 
 use DateInterval;
 use DateTime;
@@ -161,9 +161,9 @@ class DateHelper extends DateTime
     public function interval($intervalSpec, $add = true)
     {
         $interval = new DateInterval($intervalSpec);
-        if($add) {
+        if ($add) {
             $this->add($interval);
-        }else{
+        } else {
             $this->sub($interval);
         }
         return $this;

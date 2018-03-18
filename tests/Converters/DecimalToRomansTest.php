@@ -13,11 +13,11 @@ class DecimalToRomansTest extends TestCase
     public function testItParsesCorrectlySimpleNumbers()
     {
         $this->assertEquals("MCMXX", $this->convertDecimal(1920));
-        
+
         $this->assertEquals("LVIII", $this->convertDecimal(58));
-        
+
         $this->assertEquals("IX", $this->convertDecimal(9));
-        
+
         $this->assertEquals("I", $this->convertDecimal(1));
     }
 

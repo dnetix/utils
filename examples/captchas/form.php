@@ -1,6 +1,6 @@
 <?php require_once '../bootstrap.php';
 
-    $recaptcha = new \Dnetix\Captchas\ReCaptcha($config_recaptcha);
+$recaptcha = new \Dnetix\Captchas\ReCaptcha($config_recaptcha);
 
 ?>
 

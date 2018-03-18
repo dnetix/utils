@@ -11,10 +11,10 @@ $src = 'http://www.gravatar.com/avatar/' . md5('dnetix@gmail.com');
 $fileCopier = FileCopier::create($src, './');
 
 $copied = $fileCopier->copyIt();
-if(!$copied){
+if (!$copied) {
     print_r($fileCopier->error());
-}else{
-    echo "<h1>Imagen " . $fileCopier->realName() ." copiada</h1>";
+} else {
+    echo "<h1>Imagen " . $fileCopier->realName() . " copiada</h1>";
     echo '<img src="./' . $fileCopier->realName() . '" />';
 }
 

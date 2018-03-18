@@ -77,30 +77,31 @@ class DateRangeChecker
      * @return array
      * @throws Exception
      */
-    private function expressionToDays($expression){
+    private function expressionToDays($expression)
+    {
         $days = [];
         $expression = str_split($expression);
 
-        if(sizeof($expression) == 1){
-            if(($day = DateHelper::parseSuffix($expression[0])) !== null){
+        if (sizeof($expression) == 1) {
+            if (($day = DateHelper::parseSuffix($expression[0])) !== null) {
                 $days[] = $day;
-            }else{
+            } else {
                 throw new Exception("Invalid Format");
             }
-        }elseif(sizeof($expression) == 2){
+        } elseif (sizeof($expression) == 2) {
             $startDay = DateHelper::parseSuffix($expression[0]);
             $endDay = DateHelper::parseSuffix($expression[1]);
-            if($startDay !== null && $endDay !== null){
-                for($i = $startDay; $i <= $endDay; $i++){
+            if ($startDay !== null && $endDay !== null) {
+                for ($i = $startDay; $i <= $endDay; $i++) {
                     $days[] = $i;
                 }
-            }else{
+            } else {
                 throw new Exception("Invalid Format");
             }
-        }else{
+        } else {
             // They are days non sequential
-            $days = array_map(function($day){
-                if($day = DateHelper::parseSuffix($day)){
+            $days = array_map(function ($day) {
+                if ($day = DateHelper::parseSuffix($day)) {
                     return $day;
                 }
             }, $expression);
@@ -117,24 +118,25 @@ class DateRangeChecker
     {
         $startTime = isset($match[self::IX_INITIAL_HOUR]) ? $match[self::IX_INITIAL_HOUR] : 0;
         $startTime .= isset($match[self::IX_INITIAL_MINS]) && $match[self::IX_INITIAL_MINS] != '' ? $match[self::IX_INITIAL_MINS] : '00';
-        
+
         $endTime = isset($match[self::IX_FINAL_HOUR]) ? $match[self::IX_FINAL_HOUR] : 24;
         $endTime .= isset($match[self::IX_FINAL_MINS]) && $match[self::IX_FINAL_MINS] != '' ? $match[self::IX_FINAL_MINS] : '00';
-        
-        return [(int) $startTime, (int) $endTime];
+
+        return [(int)$startTime, (int)$endTime];
     }
 
-    private function addCondition($days, $allow, $condition){
-        if($allow){
+    private function addCondition($days, $allow, $condition)
+    {
+        if ($allow) {
             $range =& $this->validRanges;
-        }else{
+        } else {
             $range =& $this->invalidRanges;
         }
-        
-        foreach ($days as $day){
-            if(isset($range[$day])){
+
+        foreach ($days as $day) {
+            if (isset($range[$day])) {
                 $range[$day][] = $condition;
-            }else{
+            } else {
                 $range[$day] = [$condition];
             }
         }
@@ -142,38 +144,39 @@ class DateRangeChecker
 
     public function check($datetime = null)
     {
-        if(is_null($datetime)) {
+        if (is_null($datetime)) {
             $datetime = new DateTime();
-        }elseif(!($datetime instanceof DateTime)){
+        } elseif (!($datetime instanceof DateTime)) {
             $datetime = $this->createDatetime($datetime);
         }
-        
+
         $dayOfWeek = $datetime->format('w');
-        $time = (int) $datetime->format('Gi');
-        
+        $time = (int)$datetime->format('Gi');
+
         $invalidRangesDay = isset($this->invalidRanges[$dayOfWeek]) ? $this->invalidRanges[$dayOfWeek] : null;
-        if($invalidRangesDay && $this->checkForRanges($invalidRangesDay, $time)){
+        if ($invalidRangesDay && $this->checkForRanges($invalidRangesDay, $time)) {
             return false;
         }
 
-        if($this->allowAll){
+        if ($this->allowAll) {
             return true;
         }
 
         $validRangesDay = isset($this->validRanges[$dayOfWeek]) ? $this->validRanges[$dayOfWeek] : null;
-        if($validRangesDay){
+        if ($validRangesDay) {
             // First im checking if there is a negated range for this time
-            if($this->checkForRanges($validRangesDay, $time)){
+            if ($this->checkForRanges($validRangesDay, $time)) {
                 return true;
             }
         }
 
         return false;
     }
-    
-    private function checkForRanges($ranges, $time){
-        foreach ($ranges as $range){
-            if($range[0] <= $time && $time <= $range[1]){
+
+    private function checkForRanges($ranges, $time)
+    {
+        foreach ($ranges as $range) {
+            if ($range[0] <= $time && $time <= $range[1]) {
                 return true;
             }
         }

@@ -1,4 +1,4 @@
-<?php  namespace Dnetix\Hierachical;
+<?php namespace Dnetix\Hierachical;
 
 /**
  * Class HierarchicalNode
@@ -7,7 +7,8 @@
  * @author Diego Calle
  * @package Dnetix\Hierachical
  */
-class HierarchicalNode {
+class HierarchicalNode
+{
 
     public $key;
     public $data;
@@ -15,42 +16,51 @@ class HierarchicalNode {
 
     public $next;
 
-    function __construct($key = null, $data = null, &$parentKeys = []) {
+    function __construct($key = null, $data = null, &$parentKeys = [])
+    {
         $this->key = $key;
         $this->data =& $data;
         $this->parentKeys = $parentKeys;
     }
 
-    public function key(){
+    public function key()
+    {
         return $this->key;
     }
 
-    public function data(){
+    public function data()
+    {
         return $this->data;
     }
 
-    public function &next(){
+    public function &next()
+    {
         return $this->next;
     }
 
-    public function level(){
+    public function level()
+    {
         return count($this->parentKeys());
     }
 
-    public function parentKeys(){
+    public function parentKeys()
+    {
         return $this->parentKeys;
     }
 
-    public function isList(){
+    public function isList()
+    {
         return is_null($this->key()) ? true : false;
     }
 
-    public function setKey($key){
+    public function setKey($key)
+    {
         $this->key = $key;
         return $this;
     }
 
-    public function setNext(&$next){
+    public function setNext(&$next)
+    {
         $this->next = $next;
         return $this;
     }

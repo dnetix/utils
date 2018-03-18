@@ -1,11 +1,13 @@
 <?php
+
 namespace Dnetix\Files;
 
 /**
  * Class FileCopier
  * Gets a file from a place, like another url and copies to another
  */
-class FileCopier {
+class FileCopier
+{
 
     private $origin;
     private $destPath;
@@ -22,23 +24,26 @@ class FileCopier {
      * @param $origin
      * @param $destPath
      */
-    public function __construct($origin, $destPath) {
+    public function __construct($origin, $destPath)
+    {
         $this->origin = $origin;
         $this->destPath = $destPath;
     }
 
-    private function validate(){
+    private function validate()
+    {
         // Check if the destination its a directory and its writable
         $destination = realpath($this->destPath);
-        if(!is_dir($destination)){
+        if (!is_dir($destination)) {
             throw new \Exception("The destination provided its not a directory");
         }
-        if(!is_writable($destination)){
+        if (!is_writable($destination)) {
             throw new \Exception("The destination provided its not writable");
         }
     }
 
-    private function getContents() {
+    private function getContents()
+    {
         if (!$this->contents) {
             $this->validate();
 
@@ -50,13 +55,13 @@ class FileCopier {
 
             // With the mimeType try to get the extension
             $extensions = MimeTypes::extensionsOfMimeType($mimeType);
-            if(!$extensions){
+            if (!$extensions) {
                 throw new \Exception("No se pudo encontrar una extension para el archivo de origen: " . $mimeType);
             }
             $this->extension = $extensions[0];
 
-            if(!$this->overwrite){
-                while(file_exists($this->realDestination())){
+            if (!$this->overwrite) {
+                while (file_exists($this->realDestination())) {
                     $this->fileName = $this->fileName . '_1';
                 }
             }
@@ -64,8 +69,9 @@ class FileCopier {
         return $this->contents;
     }
 
-    public function fileName(){
-        if(!$this->fileName){
+    public function fileName()
+    {
+        if (!$this->fileName) {
             preg_match_all('/\/([^\/]+?)(?:$|\?|\.)/', $this->origin, $matches);
             $name = end($matches[1]);
             $this->fileName = $name;
@@ -73,53 +79,61 @@ class FileCopier {
         return $this->fileName;
     }
 
-    public function extension(){
+    public function extension()
+    {
         return $this->extension;
     }
 
-    public function realDestination(){
-        if(!$this->contents){
+    public function realDestination()
+    {
+        if (!$this->contents) {
             return null;
         }
         return $this->destPath . '/' . $this->fileName() . $this->extension();
     }
 
-    public function realName() {
-        if(!$this->contents){
+    public function realName()
+    {
+        if (!$this->contents) {
             return null;
         }
         return $this->fileName() . $this->extension();
     }
 
-    public function copyIt() {
+    public function copyIt()
+    {
         try {
             $this->getContents();
-            if(!$this->fileName()){
+            if (!$this->fileName()) {
                 throw new \Exception("A name couldnt be found, please set one");
             }
             file_put_contents($this->realDestination(), $this->getContents());
             return true;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $this->error = $e->getMessage();
             return false;
         }
     }
 
-    public function setFileName($name) {
+    public function setFileName($name)
+    {
         $this->fileName = $name;
         return $this;
     }
 
-    public function setOverwrite($overwrite) {
+    public function setOverwrite($overwrite)
+    {
         $this->overwrite = $overwrite;
         return $this;
     }
 
-    public function error() {
+    public function error()
+    {
         return $this->error;
     }
 
-    public static function create($origin, $destPath) {
+    public static function create($origin, $destPath)
+    {
         return new self($origin, $destPath);
     }
 

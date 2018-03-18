@@ -1,4 +1,4 @@
-<?php  namespace Dnetix\Presenters;
+<?php namespace Dnetix\Presenters;
 
 use Exception;
 
@@ -7,9 +7,11 @@ use Exception;
  * @author Diego Calle
  * @package Dnetix\Presenters
  */
-class PresenterException extends Exception {
+class PresenterException extends Exception
+{
 
-    function __construct($message) {
+    function __construct($message)
+    {
         parent::__construct($message);
     }
 

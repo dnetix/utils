@@ -17,29 +17,29 @@ class DecimalToRomans implements Provider
         ['IV', 4],
         ['I', 1],
     ];
-    
+
     private $actual = 0;
 
     public function convertValue($value)
     {
         $romans = [];
         list($roman, $decimal) = $this->nextEquivalent();
-        while($value > 0){
+        while ($value > 0) {
 
-            if($value >= $decimal){
+            if ($value >= $decimal) {
                 $romans[] = $roman;
                 $value -= $decimal;
-            }else{
+            } else {
                 list($roman, $decimal) = $this->nextEquivalent();
             }
         }
-        
+
         return implode('', $romans);
     }
 
     private function nextEquivalent()
     {
-        if($this->actual < sizeof(self::$DECIMAL_ROMAN)){
+        if ($this->actual < sizeof(self::$DECIMAL_ROMAN)) {
             $equivalent = self::$DECIMAL_ROMAN[$this->actual];
             $this->actual++;
             return $equivalent;

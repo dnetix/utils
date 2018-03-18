@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $config_recaptcha = [
     'site_key' => '',
@@ -24,7 +24,8 @@ function facebook($accessToken = null){
 }
  * */
 
-function facebook($accessToken = null){
+function facebook($accessToken = null)
+{
 
     $config = [
         'app_id' => 'asvbd',

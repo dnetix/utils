@@ -4,7 +4,7 @@ namespace Dnetix\Converters;
 
 class RomanConverter extends Converter
 {
-    
+
     private $value;
 
     protected function __construct($value = null)
