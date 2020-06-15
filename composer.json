@@ -1,6 +1,5 @@
 {
   "name": "dnetix/utils",
-  "version": "0.4.1",
   "description": "A different set of utilities to make easier working in PHP",
   "type": "library",
   "license": "MIT",
@@ -10,19 +9,28 @@
       "email": "dnetix@gmail.com"
     }
   ],
-  "suggest": {
-    "facebook/php-sdk-v4": "To use the Social Facebook Handler"
+  "require": {
+    "php": ">=7.2"
   },
   "autoload": {
     "psr-4": {
       "Dnetix\\": "src/Dnetix/"
-    },
-    "classmap": [
-      "tests/"
-    ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.3",
-    "facebook/php-sdk-v4": "5.1.*"
+    "phpunit/phpunit": "^8.5",
+    "facebook/php-sdk-v4": "5.1.*",
+    "friendsofphp/php-cs-fixer": "^2.16"
+  },
+  "suggest": {
+    "facebook/php-sdk-v4": "To use the Social Facebook Handler"
+  },
+  "scripts": {
+    "php-cs-fixer": "vendor/bin/php-cs-fixer fix --config=.php_cs"
   }
 }
