@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Converters;
+
 use Dnetix\Converters\RomanConverter;
+use Exception;
+use Tests\TestCase;
 
 class RomansToDecimalTest extends TestCase
 {
-
     public function convertRoman($roman)
     {
         return RomanConverter::load($roman)->toDecimal();
@@ -26,11 +29,9 @@ class RomansToDecimalTest extends TestCase
         $this->assertEquals(500, $this->convertRoman('d'));
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testItThrowsExceptionWhenTheRomanNumberItsMalformed()
     {
+        $this->expectException(Exception::class);
         $this->convertRoman('MCMZI');
     }
 
@@ -48,20 +49,15 @@ class RomansToDecimalTest extends TestCase
         $this->assertEquals(749, $this->convertRoman('DCCXLIX'));
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testItThrowsExceptionWhenNoProviderExists()
     {
-        RomanConverter::load("XI")->toHexadecimal();
+        $this->expectException(Exception::class);
+        RomanConverter::load('XI')->toHexadecimal();
     }
 
-    /**
-     * @expectedException Exception
-     */
     public function testItThrowsExceptionWhenNoConversionNotationUsed()
     {
-        RomanConverter::load("XI")->decimal();
+        $this->expectException(Exception::class);
+        RomanConverter::load('XI')->decimal();
     }
-
 }

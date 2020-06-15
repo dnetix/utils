@@ -1,11 +1,14 @@
 <?php
 
+namespace Tests\Dates;
+
 use Dnetix\Dates\DateHelper;
 use Dnetix\Dates\DateRangeChecker;
+use Exception;
+use Tests\TestCase;
 
 class DateCheckerTest extends TestCase
 {
-
     /**
      * @param $day
      * @param $time
@@ -36,10 +39,10 @@ class DateCheckerTest extends TestCase
             ['date' => $this->createDateTime('W', '8:00'), 'expect' => true],
             ['date' => $this->createDateTime('L', '8:00')->getTimestamp(), 'expect' => true],
             ['date' => $this->createDateTime('D', '10:00'), 'expect' => false],
-            ['date' => $this->createDateTime('L', '12:31'), 'expect' => false]
+            ['date' => $this->createDateTime('L', '12:31'), 'expect' => false],
         ];
 
-        $checker = DateRangeChecker::load("LV8-12:30|LV14:10-18|S8-12|!H");
+        $checker = DateRangeChecker::load('LV8-12:30|LV14:10-18|S8-12|!H');
 
         foreach ($testingDates as $testingDate) {
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
@@ -53,10 +56,10 @@ class DateCheckerTest extends TestCase
             ['date' => $this->createDateTime('L', '8:00')->getTimestamp(), 'expect' => true],
             ['date' => $this->createDateTime('D', '10:00'), 'expect' => false],
             ['date' => $this->createDateTime('L', '12:31'), 'expect' => false],
-            ['date' => $this->createDateTime('J', '9:00'), 'expect' => false]
+            ['date' => $this->createDateTime('J', '9:00'), 'expect' => false],
         ];
 
-        $checker = DateRangeChecker::load("LMV8-12:30");
+        $checker = DateRangeChecker::load('LMV8-12:30');
 
         foreach ($testingDates as $testingDate) {
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
@@ -70,10 +73,10 @@ class DateCheckerTest extends TestCase
             ['date' => $this->createDateTime('L', '8:00')->getTimestamp(), 'expect' => true],
             ['date' => $this->createDateTime('D', '10:00'), 'expect' => false],
             ['date' => $this->createDateTime('L', '12:31'), 'expect' => false],
-            ['date' => $this->createDateTime('J', '9:00'), 'expect' => false]
+            ['date' => $this->createDateTime('J', '9:00'), 'expect' => false],
         ];
 
-        $checker = DateRangeChecker::load("LMVAZ8-12:30");
+        $checker = DateRangeChecker::load('LMVAZ8-12:30');
 
         foreach ($testingDates as $testingDate) {
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
@@ -88,30 +91,26 @@ class DateCheckerTest extends TestCase
             ['date' => $this->createDateTime('D', '10:00'), 'expect' => true],
             ['date' => $this->createDateTime('L', '12:31'), 'expect' => true],
             ['date' => $this->createDateTime('M', '12:30'), 'expect' => false],
-            ['date' => $this->createDateTime('M', '14:00'), 'expect' => false]
+            ['date' => $this->createDateTime('M', '14:00'), 'expect' => false],
         ];
 
-        $checker = DateRangeChecker::load("A|!M12-14");
+        $checker = DateRangeChecker::load('A|!M12-14');
 
         foreach ($testingDates as $testingDate) {
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
         }
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testSingleLetterInvalidThrowsException()
     {
-        $checker = DateRangeChecker::load("Z");
+        $this->expectException(Exception::class);
+        $checker = DateRangeChecker::load('Z');
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testInvalidRangeThrowsException()
     {
-        $checker = DateRangeChecker::load("LZ10-12");
+        $this->expectException(Exception::class);
+        $checker = DateRangeChecker::load('LZ10-12');
     }
 
     public function testItParsesCorrectlyTheFinalTime()
@@ -122,7 +121,7 @@ class DateCheckerTest extends TestCase
             ['date' => $this->createDateTime('L', '1:01')->getTimestamp(), 'expect' => false],
         ];
 
-        $checker = DateRangeChecker::load("L0-1");
+        $checker = DateRangeChecker::load('L0-1');
 
         foreach ($testingDates as $testingDate) {
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
@@ -137,7 +136,7 @@ class DateCheckerTest extends TestCase
             ['date' => $this->createDateTime('L', '1:01')->getTimestamp(), 'expect' => false],
         ];
 
-        $checker = DateRangeChecker::load("D6-12");
+        $checker = DateRangeChecker::load('D6-12');
 
         foreach ($testingDates as $testingDate) {
             $this->assertEquals($checker->check($testingDate['date']), $testingDate['expect']);
