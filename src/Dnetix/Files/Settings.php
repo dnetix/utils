@@ -1,4 +1,6 @@
-<?php namespace Dnetix\Files;
+<?php
+
+namespace Dnetix\Files;
 
 use Exception;
 
@@ -7,17 +9,15 @@ use Exception;
  * Stores anything in files.
  *
  * @author Diego Calle
- * @package Dnetix\Files
  */
 class Settings
 {
-
     protected $folderPath;
     protected $name;
 
     protected $data;
 
-    function __construct($name, $config = [])
+    public function __construct($name, $config = [])
     {
         foreach ($config as $key => $value) {
             $this->$key = $value;
@@ -84,10 +84,10 @@ class Settings
             $this->data = unserialize(file_get_contents($this->keyFile()));
         } else {
             if (!is_dir($this->folderPath())) {
-                throw new Exception("No existe el directorio para las configuraciones");
+                throw new Exception('No existe el directorio para las configuraciones');
             }
             if (!is_writable($this->folderPath())) {
-                throw new Exception("El directorio de configuraciones no permite la escritura");
+                throw new Exception('El directorio de configuraciones no permite la escritura');
             }
         }
     }
@@ -97,7 +97,7 @@ class Settings
         $this->data = file_put_contents($this->keyFile(), serialize($this->data));
     }
 
-    function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
         if (is_object($this->data)) {
             return $this->data->{$name}($arguments);
@@ -109,9 +109,8 @@ class Settings
         return null;
     }
 
-    function __destruct()
+    public function __destruct()
     {
         $this->store();
     }
-
 }

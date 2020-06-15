@@ -6,7 +6,7 @@ use Facebook\Facebook;
 
 /**
  * Class FacebookHandler
- * Extends the Facebook class in order to make easier the management of the functions provided by the API
+ * Extends the Facebook class in order to make easier the management of the functions provided by the API.
  */
 class FacebookHandler extends Facebook
 {
@@ -47,7 +47,7 @@ class FacebookHandler extends Facebook
     }
 
     /**
-     * The changes the permissions by default
+     * The changes the permissions by default.
      * @param $permissions
      * @return $this
      */
@@ -58,7 +58,7 @@ class FacebookHandler extends Facebook
     }
 
     /**
-     * Returns the link to make the authentication on Facebook OAuth
+     * Returns the link to make the authentication on Facebook OAuth.
      * @return string
      */
     public function getLoginUrl()
@@ -101,7 +101,7 @@ class FacebookHandler extends Facebook
     }
 
     /**
-     * Checks if there is errors while using the API, for example, if the application data has not been provided
+     * Checks if there is errors while using the API, for example, if the application data has not been provided.
      * @return bool
      */
     public function isConnected()
@@ -110,7 +110,7 @@ class FacebookHandler extends Facebook
     }
 
     /**
-     * Transforms the actual Access Token (expires in 2 hours) to a long lived one (2 months)
+     * Transforms the actual Access Token (expires in 2 hours) to a long lived one (2 months).
      * @return \Facebook\Authentication\AccessToken
      */
     public function getLongLivedAccessToken()

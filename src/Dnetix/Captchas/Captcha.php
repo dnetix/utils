@@ -2,24 +2,22 @@
 
 namespace Dnetix\Captchas;
 
-
 interface Captcha
 {
-
     /**
-     * Returns the HTML code to insert in the form that will be uploaded
+     * Returns the HTML code to insert in the form that will be uploaded.
      * @return string
      */
     public function getFormTag();
 
     /**
-     * Returns the HTML script tag(s) necessary in order to work properly
+     * Returns the HTML script tag(s) necessary in order to work properly.
      * @return string
      */
     public function getScriptTag();
 
     /**
-     * Receives the captcha result and checks if its valid or not
+     * Receives the captcha result and checks if its valid or not.
      * @param $response
      * @param $remoteIp
      * @return bool
@@ -27,9 +25,8 @@ interface Captcha
     public function check($response, $remoteIp = null);
 
     /**
-     * Returns the string with the errors if any
+     * Returns the string with the errors if any.
      * @return string
      */
     public function getErrorMessages();
-
 }

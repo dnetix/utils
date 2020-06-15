@@ -1,13 +1,9 @@
-<?php namespace Dnetix;
+<?php
 
-/**
- * Class HttpCodes
- * @author Diego Calle
- * @package Dnetix
- */
+namespace Dnetix;
+
 class HttpCodes
 {
-
     /** Informational */
     const HTTP_CONTINUE = 100;
     const HTTP_SWITCHING_PROTOCOLS = 101;
@@ -59,7 +55,7 @@ class HttpCodes
     const HTTP_GATEWAY_TIMEOUT = 504;
     const HTTP_VERSION_NOT_SUPPORTED = 505;
 
-    public static $messages = array(
+    public static $messages = [
 
         100 => '100 Continue',
         101 => '101 Switching Protocols',
@@ -105,12 +101,11 @@ class HttpCodes
         502 => '502 Bad Gateway',
         503 => '503 Service Unavailable',
         504 => '504 Gateway Timeout',
-        505 => '505 HTTP Version Not Supported'
-    );
+        505 => '505 HTTP Version Not Supported',
+    ];
 
     public static function isValidCode($code)
     {
         return array_key_exists($code, self::$messages);
     }
-
 }

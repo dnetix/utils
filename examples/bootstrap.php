@@ -4,7 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $config_recaptcha = [
     'site_key' => '',
-    'secret_key' => ''
+    'secret_key' => '',
 ];
 
 /*
@@ -26,11 +26,10 @@ function facebook($accessToken = null){
 
 function facebook($accessToken = null)
 {
-
     $config = [
         'app_id' => 'asvbd',
         'app_secret' => 'svdasdvasv',
-        'login_callback_url' => 'davsdav'
+        'login_callback_url' => 'davsdav',
     ];
 
     $config['access_token'] = $accessToken;

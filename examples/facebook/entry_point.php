@@ -1,4 +1,6 @@
-<?php require_once '../bootstrap.php';
+<?php
+
+require_once '../bootstrap.php';
 
 $fb = facebook();
 $graphUser = $fb->getMe();
@@ -23,7 +25,6 @@ if ($graphUser) {
     print_r($accessToken);
     print_r($expiresOn);
     echo '<img src="' . $profileImageUrl . '" alt="' . $name . '" />';
-
 } else {
     // A user has not been obtained so... handle that
 }

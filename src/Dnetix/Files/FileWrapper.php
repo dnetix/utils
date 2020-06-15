@@ -1,16 +1,16 @@
-<?php namespace Dnetix\Files;
+<?php
+
+namespace Dnetix\Files;
 
 /**
  * Class FileWrapper
  * An utility class to use with Symfony\Component\HttpFoundation\File\UploadedFile
- * for handling basic stuff
+ * for handling basic stuff.
  *
  * @author Diego Calle
- * @package Dnetix\Files
  */
 class FileWrapper
 {
-
     private $file;
 
     protected $upload_path;
@@ -18,7 +18,7 @@ class FileWrapper
     protected $override = false;
     protected $base_path;
 
-    function __construct($file)
+    public function __construct($file)
     {
         $this->file = $file;
     }
@@ -128,5 +128,4 @@ class FileWrapper
             return false;
         }
     }
-
 }

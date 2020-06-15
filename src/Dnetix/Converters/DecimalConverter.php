@@ -2,22 +2,20 @@
 
 namespace Dnetix\Converters;
 
-
 class DecimalConverter extends Converter
 {
-
     private $value;
 
     protected function __construct($value = null)
     {
         if (!is_numeric($value)) {
-            throw new \Exception("The value to convert has to be numeric");
+            throw new \Exception('The value to convert has to be numeric');
         }
         $this->value = (int)$value;
     }
 
     /**
-     * Returns the value in the converter to convert
+     * Returns the value in the converter to convert.
      * @return mixed
      */
     public function value()
@@ -26,7 +24,7 @@ class DecimalConverter extends Converter
     }
 
     /**
-     * Returns the identifier for the converter
+     * Returns the identifier for the converter.
      * @return string
      */
     public function identifier()

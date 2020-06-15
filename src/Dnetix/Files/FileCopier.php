@@ -4,11 +4,10 @@ namespace Dnetix\Files;
 
 /**
  * Class FileCopier
- * Gets a file from a place, like another url and copies to another
+ * Gets a file from a place, like another url and copies to another.
  */
 class FileCopier
 {
-
     private $origin;
     private $destPath;
     private $fileName;
@@ -35,10 +34,10 @@ class FileCopier
         // Check if the destination its a directory and its writable
         $destination = realpath($this->destPath);
         if (!is_dir($destination)) {
-            throw new \Exception("The destination provided its not a directory");
+            throw new \Exception('The destination provided its not a directory');
         }
         if (!is_writable($destination)) {
-            throw new \Exception("The destination provided its not writable");
+            throw new \Exception('The destination provided its not writable');
         }
     }
 
@@ -56,7 +55,7 @@ class FileCopier
             // With the mimeType try to get the extension
             $extensions = MimeTypes::extensionsOfMimeType($mimeType);
             if (!$extensions) {
-                throw new \Exception("No se pudo encontrar una extension para el archivo de origen: " . $mimeType);
+                throw new \Exception('No se pudo encontrar una extension para el archivo de origen: ' . $mimeType);
             }
             $this->extension = $extensions[0];
 
@@ -105,7 +104,7 @@ class FileCopier
         try {
             $this->getContents();
             if (!$this->fileName()) {
-                throw new \Exception("A name couldnt be found, please set one");
+                throw new \Exception('A name couldnt be found, please set one');
             }
             file_put_contents($this->realDestination(), $this->getContents());
             return true;
@@ -136,5 +135,4 @@ class FileCopier
     {
         return new self($origin, $destPath);
     }
-
 }

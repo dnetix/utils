@@ -20,7 +20,6 @@ use Exception;
  */
 class DateRangeChecker
 {
-
     private $regexExpression = "/(!)?([A-z]+)(\d+)?:?(\d+)?-?(\d+)?:?(\d+)?/";
 
     const IX_EXPRESSION = 0;
@@ -72,7 +71,7 @@ class DateRangeChecker
     }
 
     /**
-     * Converts a days expression to the actual DateTime numbered days array
+     * Converts a days expression to the actual DateTime numbered days array.
      * @param $expression
      * @return array
      * @throws Exception
@@ -82,13 +81,13 @@ class DateRangeChecker
         $days = [];
         $expression = str_split($expression);
 
-        if (sizeof($expression) == 1) {
+        if (count($expression) == 1) {
             if (($day = DateHelper::parseSuffix($expression[0])) !== null) {
                 $days[] = $day;
             } else {
-                throw new Exception("Invalid Format");
+                throw new Exception('Invalid Format');
             }
-        } elseif (sizeof($expression) == 2) {
+        } elseif (count($expression) == 2) {
             $startDay = DateHelper::parseSuffix($expression[0]);
             $endDay = DateHelper::parseSuffix($expression[1]);
             if ($startDay !== null && $endDay !== null) {
@@ -96,7 +95,7 @@ class DateRangeChecker
                     $days[] = $i;
                 }
             } else {
-                throw new Exception("Invalid Format");
+                throw new Exception('Invalid Format');
             }
         } else {
             // They are days non sequential
@@ -110,7 +109,7 @@ class DateRangeChecker
     }
 
     /**
-     * Returns an array with the initial time and the final time window for the parsed match
+     * Returns an array with the initial time and the final time window for the parsed match.
      * @param $match
      * @return array
      */
@@ -128,9 +127,9 @@ class DateRangeChecker
     private function addCondition($days, $allow, $condition)
     {
         if ($allow) {
-            $range =& $this->validRanges;
+            $range = &$this->validRanges;
         } else {
-            $range =& $this->invalidRanges;
+            $range = &$this->invalidRanges;
         }
 
         foreach ($days as $day) {

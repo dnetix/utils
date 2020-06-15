@@ -1,12 +1,13 @@
-<?php namespace Dnetix\Captchas;
+<?php
+
+namespace Dnetix\Captchas;
 
 /**
  * Class ReCaptcha
- * A PHP way to use Google's ReCaptcha
+ * A PHP way to use Google's ReCaptcha.
  */
 class ReCaptcha implements Captcha
 {
-
     public $status = false;
     public $errors = [];
 
@@ -16,7 +17,7 @@ class ReCaptcha implements Captcha
     const URL_SCRIPT = 'https://www.google.com/recaptcha/api.js';
     const URL_VERIFY = 'https://www.google.com/recaptcha/api/siteverify';
 
-    function __construct($config)
+    public function __construct($config)
     {
         if (isset($config['site_key']) && isset($config['secret_key'])) {
             $this->site_key = $config['site_key'];
@@ -96,7 +97,7 @@ class ReCaptcha implements Captcha
     }
 
     /**
-     * Returns a HTML string to put on the form that you want to protect with the captcha
+     * Returns a HTML string to put on the form that you want to protect with the captcha.
      * @return string
      */
     public function getFormTag()
@@ -106,7 +107,7 @@ class ReCaptcha implements Captcha
 
     /**
      * Returns a HTML string with a script tag to put on the HEAD part of the HTML or after the close of BODY tag
-     * it will load the javascript from google that handles the ReCaptcha
+     * it will load the javascript from google that handles the ReCaptcha.
      * @return string
      */
     public function getScriptTag()
@@ -131,7 +132,7 @@ class ReCaptcha implements Captcha
         return file_get_contents(self::URL_VERIFY . '?' . http_build_query([
                 'secret' => $secretKey,
                 'response' => $response,
-                'remoteip' => $remoteIp
+                'remoteip' => $remoteIp,
             ]));
     }
 
@@ -144,5 +145,4 @@ class ReCaptcha implements Captcha
             return json_decode($httpResponse);
         }
     }
-
 }

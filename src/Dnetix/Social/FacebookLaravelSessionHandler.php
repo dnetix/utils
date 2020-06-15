@@ -6,7 +6,6 @@ use Facebook\PersistentData\PersistentDataInterface;
 
 class FacebookLaravelSessionHandler implements PersistentDataInterface
 {
-
     private $handler;
     protected $sessionPrefix = 'FBRLH_';
 
@@ -37,5 +36,4 @@ class FacebookLaravelSessionHandler implements PersistentDataInterface
     {
         $this->handler->put($this->sessionPrefix . $key, $value);
     }
-
 }

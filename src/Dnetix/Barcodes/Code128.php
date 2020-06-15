@@ -1,16 +1,16 @@
-<?php namespace Dnetix\Barcodes;
+<?php
+
+namespace Dnetix\Barcodes;
 
 /**
- * Class Code128
+ * Class Code128.
  *
  * Class for the creation of strings for the generation of Code128 barcodes
  *
  * @author Diego Calle
- * @package Dnetix\Barcodes
  */
 class Code128
 {
-
     private $string;
     private $checksum;
     private $code128;
@@ -22,7 +22,7 @@ class Code128
     const CHECKMOD = 103;
 
     /**
-     * Obtains the string parsed to be used with the Code128 font
+     * Obtains the string parsed to be used with the Code128 font.
      * @param $string
      * @return string
      */
@@ -32,7 +32,7 @@ class Code128
     }
 
     /**
-     * Calculates the string to create the one coded to use with Code128
+     * Calculates the string to create the one coded to use with Code128.
      * @param $string
      * @return string
      */
@@ -41,7 +41,7 @@ class Code128
         $this->checksum = 104;
         $this->string = $string;
         $string = str_split($string);
-        $len = sizeof($string);
+        $len = count($string);
         $i = 0;
         $this->code128 = chr(self::STARTB);
         while ($i < $len) {

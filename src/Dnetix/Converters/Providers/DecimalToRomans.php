@@ -27,7 +27,6 @@ class DecimalToRomans implements Provider
         $romans = [];
         list($roman, $decimal) = $this->nextEquivalent();
         while ($value > 0) {
-
             if ($value >= $decimal) {
                 $romans[] = $roman;
                 $value -= $decimal;
@@ -41,7 +40,7 @@ class DecimalToRomans implements Provider
 
     private function nextEquivalent()
     {
-        if ($this->actual < sizeof(self::$DECIMAL_ROMAN)) {
+        if ($this->actual < count(self::$DECIMAL_ROMAN)) {
             $equivalent = self::$DECIMAL_ROMAN[$this->actual];
             $this->actual++;
             return $equivalent;

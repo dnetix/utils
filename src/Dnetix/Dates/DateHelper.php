@@ -1,4 +1,6 @@
-<?php namespace Dnetix\Dates;
+<?php
+
+namespace Dnetix\Dates;
 
 use DateInterval;
 use DateTime;
@@ -6,28 +8,26 @@ use Exception;
 
 /**
  * Class DateHelper
- * A utility for the management of dates in PHP, works like Carbon in Spanish
+ * A utility for the management of dates in PHP, works like Carbon in Spanish.
  *
- * @property      integer $year
- * @property      integer $month
- * @property      integer $day
- * @property      integer $hour
- * @property      integer $minute
- * @property      integer $second
- * @property      integer $timestamp seconds since the Unix Epoch
- * @property-read integer $micro
- * @property-read integer $dayOfWeek 0 (for Sunday) through 6 (for Saturday)
- * @property-read integer $dayOfYear 0 through 365
- * @property-read integer $weekOfMonth 1 through 6
+ * @property      int $year
+ * @property      int $month
+ * @property      int $day
+ * @property      int $hour
+ * @property      int $minute
+ * @property      int $second
+ * @property      int $timestamp seconds since the Unix Epoch
+ * @property-read int $micro
+ * @property-read int $dayOfWeek 0 (for Sunday) through 6 (for Saturday)
+ * @property-read int $dayOfYear 0 through 365
+ * @property-read int $weekOfMonth 1 through 6
  *
  * @author Diego Calle
- * @package Dnetix\Dates
  */
 class DateHelper extends DateTime
 {
-
     /**
-     * The day constants
+     * The day constants.
      */
     const SUNDAY = 0;
     const MONDAY = 1;
@@ -38,7 +38,7 @@ class DateHelper extends DateTime
     const SATURDAY = 6;
 
     /**
-     * Format constants
+     * Format constants.
      */
     public static $FORMATS = [
         'year' => 'Y',
@@ -66,7 +66,7 @@ class DateHelper extends DateTime
         self::WEDNESDAY => 'Miercoles',
         self::THURSDAY => 'Jueves',
         self::FRIDAY => 'Viernes',
-        self::SATURDAY => 'Sabado'
+        self::SATURDAY => 'Sabado',
     ];
 
     protected static $DAYS_SUFFIX = [
@@ -76,11 +76,11 @@ class DateHelper extends DateTime
         'J' => self::THURSDAY,
         'V' => self::FRIDAY,
         'S' => self::SATURDAY,
-        'D' => self::SUNDAY
+        'D' => self::SUNDAY,
     ];
 
     /**
-     * Translation for the months of the year
+     * Translation for the months of the year.
      * @var array
      */
     protected static $MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -102,7 +102,7 @@ class DateHelper extends DateTime
     }
 
     /**
-     * Returns a DateDifference between the date provided and the toDate, if not provided the actual moment
+     * Returns a DateDifference between the date provided and the toDate, if not provided the actual moment.
      * @param $fromDate
      * @param string $toDate
      * @return DateDifference
@@ -123,7 +123,7 @@ class DateHelper extends DateTime
     }
 
     /**
-     * Allows to access the private properties of the DateTime formatted
+     * Allows to access the private properties of the DateTime formatted.
      * @param $name
      * @return string
      * @throws Exception
@@ -133,7 +133,7 @@ class DateHelper extends DateTime
         if (array_key_exists($name, self::$FORMATS)) {
             return $this->format(self::$FORMATS[$name]);
         }
-        throw new Exception("The format cant be parsed");
+        throw new Exception('The format cant be parsed');
     }
 
     public function getDayName()
@@ -153,7 +153,7 @@ class DateHelper extends DateTime
 
     /**
      * Modifies the date with the interval specification
-     * P#Y#M#D#WT#H#M#S
+     * P#Y#M#D#WT#H#M#S.
      * @param $intervalSpec
      * @param bool $add
      * @return $this
@@ -187,7 +187,7 @@ class DateHelper extends DateTime
     /* Some templates for the format */
 
     /**
-     * Returns hh:mm AM/PM the hour and minutes with the meridian
+     * Returns hh:mm AM/PM the hour and minutes with the meridian.
      * @return string
      */
     public function getTimeMeridian()
@@ -196,7 +196,7 @@ class DateHelper extends DateTime
     }
 
     /**
-     * Returns HH:mm
+     * Returns HH:mm.
      * @return string
      */
     public function getTime()
@@ -205,7 +205,7 @@ class DateHelper extends DateTime
     }
 
     /**
-     * Formats the date according in MySQL format
+     * Formats the date according in MySQL format.
      * @return string
      */
     public function getSQLDate()
@@ -214,7 +214,7 @@ class DateHelper extends DateTime
     }
 
     /**
-     * Returns the date time formatted as MySQL timestamp
+     * Returns the date time formatted as MySQL timestamp.
      * @return string
      */
     public function getSQLTimestamp()
@@ -229,7 +229,7 @@ class DateHelper extends DateTime
     }
 
     /**
-     * Returns the number of the week
+     * Returns the number of the week.
      * @return string
      */
     public function getWeekNumber()

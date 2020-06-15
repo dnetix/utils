@@ -1,17 +1,17 @@
-<?php namespace Dnetix\Hierachical;
+<?php
+
+namespace Dnetix\Hierachical;
 
 use Exception;
 
 /**
  * Class HierarchicalTree
- * A PHP implementation for Linked List
+ * A PHP implementation for Linked List.
  *
  * @author Diego Calle
- * @package Dnetix\Hierachical
  */
 class HierarchicalTree implements \Iterator
 {
-
     /**
      * @var HierarchicalNode
      */
@@ -39,7 +39,7 @@ class HierarchicalTree implements \Iterator
 
     /**
      * Adds a new node to the list, data can be anything a unique key has to be provided, and if no parentKey provided
-     * it will be a root node
+     * it will be a root node.
      * @param $key
      * @param $data
      * @param $parentKey
@@ -51,7 +51,7 @@ class HierarchicalTree implements \Iterator
         $parentKeys = [];
 
         if (empty($key)) {
-            throw new Exception("You must define a key for the node");
+            throw new Exception('You must define a key for the node');
         }
 
         if (!is_null($parentKey)) {
@@ -83,7 +83,6 @@ class HierarchicalTree implements \Iterator
             } else {
                 $node = $this->getLastSameLevelNode($node);
             }
-
         } else {
             $node = $this->getLastSameLevelNode();
         }
@@ -99,7 +98,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Iterates to the next node in the list, returns null when ended
+     * Iterates to the next node in the list, returns null when ended.
      * @return HierarchicalNode
      */
     public function nextNode()
@@ -126,7 +125,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Returns the current node pointed
+     * Returns the current node pointed.
      * @return HierarchicalNode
      */
     public function index()
@@ -171,13 +170,12 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Resets the list to iterate it again from the beginning
+     * Resets the list to iterate it again from the beginning.
      * @param bool $respectLimited
      */
     public function reset($respectLimited = false)
     {
         if ($respectLimited && !is_null($this->limitedTo)) {
-
             $this->index = $this->limitedTo;
         } else {
             $this->index = $this->root;
@@ -187,7 +185,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Limits the list to iterate only from the node given, can be a node or a key
+     * Limits the list to iterate only from the node given, can be a node or a key.
      * @param $node
      * @return $this
      */
@@ -202,7 +200,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Erase the limit setted to the list
+     * Erase the limit setted to the list.
      * @return $this
      */
     public function noLimit()
@@ -212,7 +210,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Finds and return the node that matches the key provided, null if not exists
+     * Finds and return the node that matches the key provided, null if not exists.
      * @param $key
      * @return HierarchicalNode|null
      */
@@ -232,7 +230,7 @@ class HierarchicalTree implements \Iterator
     /** Implementation to use it with foreach */
 
     /**
-     * Return the current element
+     * Return the current element.
      * @link http://php.net/manual/en/iterator.current.php
      * @return mixed Can return any type.
      */
@@ -245,7 +243,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Move forward to next element
+     * Move forward to next element.
      * @link http://php.net/manual/en/iterator.next.php
      * @return void Any returned value is ignored.
      */
@@ -255,7 +253,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Return the key of the current element
+     * Return the key of the current element.
      * @link http://php.net/manual/en/iterator.key.php
      * @return mixed scalar on success, or null on failure.
      */
@@ -267,16 +265,16 @@ class HierarchicalTree implements \Iterator
                 return null;
             }
             return $node->key();
-        } else if (is_null($this->index())) {
+        } elseif (is_null($this->index())) {
             return null;
         }
         return $this->index()->key();
     }
 
     /**
-     * Checks if current position is valid
+     * Checks if current position is valid.
      * @link http://php.net/manual/en/iterator.valid.php
-     * @return boolean The return value will be casted to boolean and then evaluated.
+     * @return bool The return value will be casted to boolean and then evaluated.
      * Returns true on success or false on failure.
      */
     public function valid()
@@ -285,7 +283,7 @@ class HierarchicalTree implements \Iterator
     }
 
     /**
-     * Rewind the Iterator to the first element
+     * Rewind the Iterator to the first element.
      * @link http://php.net/manual/en/iterator.rewind.php
      * @return void Any returned value is ignored.
      */
@@ -293,5 +291,4 @@ class HierarchicalTree implements \Iterator
     {
         $this->reset(true);
     }
-
 }

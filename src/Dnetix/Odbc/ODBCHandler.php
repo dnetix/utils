@@ -1,24 +1,24 @@
-<?php namespace Dnetix\Odbc;
+<?php
+
+namespace Dnetix\Odbc;
 
 /**
  * Class ODBCHandler
- * Utility class for managing ODBC connections especially with IBS
+ * Utility class for managing ODBC connections especially with IBS.
  *
  * @author Diego Calle
- * @package Dnetix\Odbc
  */
 class ODBCHandler
 {
+    private $conn = false;
 
-    private $conn = FALSE;
-
-    private $dns = FALSE;
+    private $dns = false;
     private $user;
     private $pass;
 
     private $_error;
 
-    private $_isexcel = FALSE;
+    private $_isexcel = false;
 
     // Constantes de respuesta de tablas de sistema
     const TABLE_SCHEM = 'TABLE_SCHEM';
@@ -26,7 +26,7 @@ class ODBCHandler
     const TABLE_TYPE = 'TABLE_TYPE';
     const TABLE_REMARKS = 'REMARKS';
 
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         if (isset($params['dns'])) {
             foreach ($params as $key => $value) {
@@ -60,37 +60,37 @@ class ODBCHandler
         $this->conn = odbc_connect($this->dns, $this->user, $this->pass);
         if (!$this->conn) {
             $this->_error = odbc_errormsg();
-            return FALSE;
+            return false;
         } else {
-            return TRUE;
+            return true;
         }
     }
 
     /**
      * Retorna un array con las tablas accesibles por el ODBC. Cada array tiene los encabezados
-     * KEY => VALUE y los key son las constantes TABLE_*
+     * KEY => VALUE y los key son las constantes TABLE_*.
      */
     public function getTables()
     {
-        $tables = array();
+        $tables = [];
         if ($this->_isConnected()) {
             $result = odbc_tables($this->conn);
             if (!$result) {
-                $this->_error = "No fue posible consultar las respuestas";
+                $this->_error = 'No fue posible consultar las respuestas';
                 return null;
             }
             while ($row = odbc_fetch_array($result)) {
                 $tables[] = $row;
             }
         } else {
-            $this->_error = "No se encuentra conectado a ningun ODBC";
+            $this->_error = 'No se encuentra conectado a ningun ODBC';
             return null;
         }
         return $tables;
     }
 
     /**
-     * Obtiene los encabezados o columnas de la tabla ingresada
+     * Obtiene los encabezados o columnas de la tabla ingresada.
      * @param $table
      * @return array|null
      */
@@ -101,11 +101,11 @@ class ODBCHandler
             $query = 'SELECT * FROM ' . $table;
             $result = odbc_exec($this->conn, $query);
             if (!$result) {
-                $this->_error = "No existe la tabla que desea consultar";
+                $this->_error = 'No existe la tabla que desea consultar';
                 return null;
             }
             $i = 1;
-            $columnsNames = array();
+            $columnsNames = [];
             $j = odbc_num_fields($result);
             while ($i <= $j) {
                 $columnsNames[] = odbc_field_name($result, $i);
@@ -113,13 +113,13 @@ class ODBCHandler
             }
             return $columnsNames;
         } else {
-            $this->_error = "No se encuentra conectado a ningun ODBC";
+            $this->_error = 'No se encuentra conectado a ningun ODBC';
             return null;
         }
     }
 
     /**
-     * Realiza una consulta al ODBC
+     * Realiza una consulta al ODBC.
      * @param $query
      * @return array|null
      */
@@ -128,32 +128,32 @@ class ODBCHandler
         if ($this->_isConnected()) {
             $result = odbc_exec($this->conn, $query);
             if (!$result) {
-                $this->_error = "No se ha podido realizar la consulta al ODBC";
+                $this->_error = 'No se ha podido realizar la consulta al ODBC';
                 return null;
             }
-            $results = array();
+            $results = [];
             while ($row = odbc_fetch_array($result)) {
                 $results[] = $row;
             }
             return $results;
         } else {
-            $this->_error = "No se encuentra conectado a ningun ODBC";
+            $this->_error = 'No se encuentra conectado a ningun ODBC';
             return null;
         }
     }
 
     /**
-     * Comprueba que se haya realizado una conexion al ODBC
+     * Comprueba que se haya realizado una conexion al ODBC.
      */
     private function _isConnected()
     {
         if ($this->conn) {
-            return TRUE;
+            return true;
         } else {
             if ($this->dns) {
                 return $this->connect();
             } else {
-                return FALSE;
+                return false;
             }
         }
     }
@@ -187,5 +187,4 @@ class ODBCHandler
     {
         return $this->conn;
     }
-
 }

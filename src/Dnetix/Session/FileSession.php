@@ -1,9 +1,11 @@
-<?php namespace Dnetix\Storage;
+<?php
+
+namespace Dnetix\Session;
 
 /**
  * Class FileSession
  * Stores information on files mented to use as a shared session in files.
- * The function that you can implement is
+ * The function that you can implement is.
  *
  * function shared_session($key = null, $default = null){
  * $user = currentUser();
@@ -20,16 +22,14 @@
  * }
  *
  * @author Diego Calle
- * @package Dnetix\Storage
  */
 class FileSession
 {
-
     public $shared_id;
     public $session_path;
     public $timestamp;
 
-    function __construct($sessionPath, $sharedId = null)
+    public function __construct($sessionPath, $sharedId = null)
     {
         $this->session_path = $sessionPath;
         $this->shared_id = is_null($sharedId) ? rand(0, 9999) : $sharedId;
@@ -58,7 +58,7 @@ class FileSession
     }
 
     /**
-     * Stores the information on the file
+     * Stores the information on the file.
      * @param $data
      * @param null $key
      * @return $this
@@ -76,7 +76,7 @@ class FileSession
     }
 
     /**
-     * Obtains the information of a session file by key
+     * Obtains the information of a session file by key.
      * @param $key
      * @param null $default
      * @return null
@@ -91,7 +91,7 @@ class FileSession
     }
 
     /**
-     * Deletes a sesion file
+     * Deletes a sesion file.
      * @param $key
      * @return $this
      */
@@ -113,8 +113,8 @@ class FileSession
         return serialize([
             'value' => $value,
             'meta' => [
-                'timestamp' => $this->timestamp()
-            ]
+                'timestamp' => $this->timestamp(),
+            ],
         ]);
     }
 
@@ -148,5 +148,4 @@ class FileSession
     {
         unlink($this->sessionFile($key));
     }
-
 }

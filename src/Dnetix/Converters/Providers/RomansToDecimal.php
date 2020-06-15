@@ -13,7 +13,7 @@ class RomansToDecimal implements Provider
         'L' => 50,
         'C' => 100,
         'D' => 500,
-        'M' => 1000
+        'M' => 1000,
     ];
 
     public function convertValue($value)
@@ -41,7 +41,7 @@ class RomansToDecimal implements Provider
 
     private function endOfEquivalents()
     {
-        return sizeof($this->equivalents);
+        return count($this->equivalents);
     }
 
     public function valueAtPosition($position)
@@ -52,7 +52,7 @@ class RomansToDecimal implements Provider
     public static function parseRoman($roman)
     {
         if (!isset(self::$ROMAN_DECIMAL[$roman])) {
-            throw new \Exception("There is no roman equivalent to: " . $roman);
+            throw new \Exception('There is no roman equivalent to: ' . $roman);
         }
         return self::$ROMAN_DECIMAL[$roman];
     }

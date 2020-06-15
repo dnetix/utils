@@ -4,7 +4,6 @@ namespace Dnetix\Converters;
 
 class RomanConverter extends Converter
 {
-
     private $value;
 
     protected function __construct($value = null)
@@ -16,7 +15,6 @@ class RomanConverter extends Converter
     {
         return preg_replace("/[\t ]/", '', strtoupper($value));
     }
-
 
     public function identifier()
     {
@@ -32,5 +30,4 @@ class RomanConverter extends Converter
     {
         return new self($value);
     }
-
 }

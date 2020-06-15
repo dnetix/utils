@@ -1,15 +1,15 @@
-<?php namespace Dnetix\Dates;
+<?php
+
+namespace Dnetix\Dates;
 
 use DateTime;
 
 /**
- * Class WeekCalculator
+ * Class WeekCalculator.
  * @author Diego Calle
- * @package Dnetix\Dates
  */
 class WeekCalculator
 {
-
     /**
      * @var DateTime
      */
@@ -37,7 +37,7 @@ class WeekCalculator
         } else {
             $this->endWeekDate = $this->fromDay->add(new \DateInterval('P' . (7 - $dayOfWeek) . 'D'));
         }
-        $this->startWeekDate = clone($this->endWeekDate);
+        $this->startWeekDate = clone $this->endWeekDate;
         $this->startWeekDate->sub(new \DateInterval('P6D'));
     }
 
@@ -102,31 +102,31 @@ class WeekCalculator
 
     public function startLastWeekDate()
     {
-        $lastWeek = clone($this->startWeekDate);
+        $lastWeek = clone $this->startWeekDate;
         return $lastWeek->sub(new \DateInterval('P7D'))->format($this->format);
     }
 
     public function endLastWeekDate()
     {
-        $lastWeek = clone($this->endWeekDate);
+        $lastWeek = clone $this->endWeekDate;
         return $lastWeek->sub(new \DateInterval('P7D'))->format($this->format);
     }
 
     public function startNextWeekDate()
     {
-        $nextweek = clone($this->startWeekDate);
+        $nextweek = clone $this->startWeekDate;
         return $nextweek->add(new \DateInterval('P7D'))->format($this->format);
     }
 
     public function endNextWeekDate()
     {
-        $nextweek = clone($this->endWeekDate);
+        $nextweek = clone $this->endWeekDate;
         return $nextweek->add(new \DateInterval('P7D'))->format($this->format);
     }
 
     public function lastWeek()
     {
-        $lastWeek = clone($this->fromDay);
+        $lastWeek = clone $this->fromDay;
         $lastWeek->sub(new \DateInterval('P7D'));
         return new self($lastWeek->format('Y-m-d'));
     }
@@ -135,5 +135,4 @@ class WeekCalculator
     {
         return $this->weekNumber() . '-' . $this->weekYear();
     }
-
 }

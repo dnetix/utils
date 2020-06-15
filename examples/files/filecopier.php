@@ -14,7 +14,6 @@ $copied = $fileCopier->copyIt();
 if (!$copied) {
     print_r($fileCopier->error());
 } else {
-    echo "<h1>Imagen " . $fileCopier->realName() . " copiada</h1>";
+    echo '<h1>Imagen ' . $fileCopier->realName() . ' copiada</h1>';
     echo '<img src="./' . $fileCopier->realName() . '" />';
 }
-

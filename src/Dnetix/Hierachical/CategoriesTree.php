@@ -1,16 +1,16 @@
-<?php namespace Dnetix\Hierachical;
+<?php
+
+namespace Dnetix\Hierachical;
 
 /**
  * Class CategoriesTree
  * Implements the HierarchicalTree to print it as HTML ordered list or select in this case the nodes need
- * to have a name method
+ * to have a name method.
  *
  * @author Diego Calle
- * @package Dnetix\Hierachical
  */
 class CategoriesTree extends HierarchicalTree
 {
-
     public $urlTo = '';
     public $prefixIdElement = 'node';
     public $classElement = 'node';
@@ -32,12 +32,12 @@ class CategoriesTree extends HierarchicalTree
         foreach ($this as $node) {
             if (is_null($currentLevel)) {
                 $currentLevel = $node->level();
-            } else if ($node->level() > $currentLevel) {
-                $toReturn[] = "<ul>";
+            } elseif ($node->level() > $currentLevel) {
+                $toReturn[] = '<ul>';
                 $currentLevel++;
-            } else if ($node->level() < $currentLevel) {
+            } elseif ($node->level() < $currentLevel) {
                 while ($node->level() < $currentLevel) {
-                    $toReturn[] = "</ul>";
+                    $toReturn[] = '</ul>';
                     $currentLevel--;
                 }
             }
@@ -46,11 +46,11 @@ class CategoriesTree extends HierarchicalTree
         }
 
         while ($currentLevel > 0) {
-            $toReturn[] = "</ul>";
+            $toReturn[] = '</ul>';
             $currentLevel--;
         }
 
-        $toReturn[] = "</ul>";
+        $toReturn[] = '</ul>';
 
         return implode("\n", $toReturn);
     }
@@ -63,12 +63,12 @@ class CategoriesTree extends HierarchicalTree
         foreach ($this as $node) {
             if (is_null($currentLevel)) {
                 $currentLevel = $node->level();
-            } else if ($node->level() > $currentLevel) {
-                $toReturn[] = "<ul>";
+            } elseif ($node->level() > $currentLevel) {
+                $toReturn[] = '<ul>';
                 $currentLevel++;
-            } else if ($node->level() < $currentLevel) {
+            } elseif ($node->level() < $currentLevel) {
                 while ($node->level() < $currentLevel) {
-                    $toReturn[] = "</ul>";
+                    $toReturn[] = '</ul>';
                     $currentLevel--;
                 }
             }
@@ -81,11 +81,11 @@ class CategoriesTree extends HierarchicalTree
         }
 
         while ($currentLevel > 0) {
-            $toReturn[] = "</ul>";
+            $toReturn[] = '</ul>';
             $currentLevel--;
         }
 
-        $toReturn[] = "</ul>";
+        $toReturn[] = '</ul>';
 
         return implode("\n", $toReturn);
     }
@@ -101,7 +101,7 @@ class CategoriesTree extends HierarchicalTree
             $optionContent = is_object($node->data()) ? $node->data()->name() : $node->data();
             $select[] = "<option value=\"{$node->key()}\"{$selectedTag}>{$optionContent}</option>";
         }
-        $select[] = "</select>";
+        $select[] = '</select>';
         return implode("\n", $select);
     }
 
@@ -112,11 +112,10 @@ class CategoriesTree extends HierarchicalTree
             foreach ($options as $tag => $value) {
                 $parsedOptions[] = $tag . '="' . $value . '"';
             }
-            if (sizeof($parsedOptions) > 0) {
+            if (count($parsedOptions) > 0) {
                 return ' ' . implode(' ', $parsedOptions);
             }
         }
         return '';
     }
-
 }

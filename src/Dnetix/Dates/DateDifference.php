@@ -1,15 +1,15 @@
-<?php namespace Dnetix\Dates;
+<?php
+
+namespace Dnetix\Dates;
 
 use DateInterval;
 
 /**
- * Class DateDifference
+ * Class DateDifference.
  * @author Diego Calle
- * @package Dnetix\Dates
  */
 class DateDifference
 {
-
     const MONTH = 1;
     const DAY = 2;
     const WEEK = 6;
@@ -28,10 +28,10 @@ class DateDifference
         'hora',
         'minuto',
         'segundo',
-        'semana'
+        'semana',
     ];
 
-    function __construct(DateInterval $dateInterval)
+    public function __construct(DateInterval $dateInterval)
     {
         $this->dateInterval = $dateInterval;
     }
@@ -74,9 +74,8 @@ class DateDifference
 
     public function forHumans()
     {
-
         if ($this->isNow()) {
-            return "Ahora mismo";
+            return 'Ahora mismo';
         }
 
         foreach ($this->intervals as $checkingUnit => $unit) {
@@ -108,7 +107,6 @@ class DateDifference
         }
 
         return implode(' ', $text);
-
     }
 
     public function getValueFromUnit($unit)
@@ -119,7 +117,6 @@ class DateDifference
             // If key doesn't exists we're talking about weeks
             return floor($this->{$this->intervals[self::DAY]} / self::DAYSPERWEEK);
         }
-
     }
 
     public function pluralize($unit)
@@ -127,13 +124,12 @@ class DateDifference
         if ($this->getValueFromUnit($unit) > 1) {
             // Special case
             if ($unit == self::MONTH) {
-                return "meses";
+                return 'meses';
             }
             return $this->translations[$unit] . 's';
         } else {
             return $this->translations[$unit];
         }
-
     }
 
     public function nextUnit($unit)
@@ -149,12 +145,11 @@ class DateDifference
         return ($this->getValueFromUnit($unit) > 0) ? true : false;
     }
 
-    function __get($name)
+    public function __get($name)
     {
         if (method_exists($this, $name)) {
             return $this->{$name}();
         }
         return $this->dateInterval->{$name};
     }
-
 }

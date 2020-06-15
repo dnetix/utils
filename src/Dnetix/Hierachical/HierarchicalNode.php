@@ -1,25 +1,25 @@
-<?php namespace Dnetix\Hierachical;
+<?php
+
+namespace Dnetix\Hierachical;
 
 /**
  * Class HierarchicalNode
- * Node class for the Hierarchical Tree
+ * Node class for the Hierarchical Tree.
  *
  * @author Diego Calle
- * @package Dnetix\Hierachical
  */
 class HierarchicalNode
 {
-
     public $key;
     public $data;
     public $parentKeys = [];
 
     public $next;
 
-    function __construct($key = null, $data = null, &$parentKeys = [])
+    public function __construct($key = null, $data = null, &$parentKeys = [])
     {
         $this->key = $key;
-        $this->data =& $data;
+        $this->data = &$data;
         $this->parentKeys = $parentKeys;
     }
 
@@ -64,5 +64,4 @@ class HierarchicalNode
         $this->next = $next;
         return $this;
     }
-
 }

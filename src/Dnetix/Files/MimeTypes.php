@@ -4,7 +4,6 @@ namespace Dnetix\Files;
 
 class MimeTypes
 {
-
     const APPLICATION_ACAD = 'application/acad';
     const APPLICATION_ARJ = 'application/arj';
     const APPLICATION_BASE64 = 'application/base64';
@@ -832,7 +831,7 @@ class MimeTypes
         self::X_WORLD_X_3DMF => ['.3dm', '.3dmf', '.qd3', '.qd3d'],
         self::X_WORLD_X_SVR => ['.svr'],
         self::X_WORLD_X_VRML => ['.vrml', '.wrl', '.wrz'],
-        self::X_WORLD_X_VRT => ['.vrt']
+        self::X_WORLD_X_VRT => ['.vrt'],
     ];
 
     public static function isValidMimeType($mimeType)
@@ -854,7 +853,7 @@ class MimeTypes
 
     /**
      * Pretty much time consuming, but returns all the mime types that match that extension
-     * Extension must have preceding point to work
+     * Extension must have preceding point to work.
      * @param $extension
      * @return array
      */
@@ -868,5 +867,4 @@ class MimeTypes
         }
         return $mimeTypesMatched;
     }
-
 }
